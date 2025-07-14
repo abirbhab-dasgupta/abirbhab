@@ -41,43 +41,65 @@ export async function POST(request: NextRequest) {
     console.log('🧹 Data sanitized, attempting to send email...');
 
     // Try the primary method first
-    let result;
     try {
-      result = await sendContactEmail(sanitizedData);
+      const result = await sendContactEmail(sanitizedData);
       console.log('✅ Primary email method result:', result);
+      
+      if (result.success) {
+        console.log('🎉 Email sent successfully to codewithad24@gmail.com!');
+        return NextResponse.json(
+          { 
+            message: 'Message sent successfully! I will get back to you soon.',
+            details: {
+              notificationId: result.notificationId,
+              status: result.status,
+            }
+          },
+          { status: 200 }
+        );
+      } else {
+        console.error('❌ Primary method failed:', result.error);
+        // Try alternative method
+        throw new Error(result.error || 'Primary method failed');
+      }
+      
     } catch (primaryError) {
       console.warn('⚠️  Primary method failed, trying alternative...');
       console.error('Primary error:', primaryError);
       
       // Try alternative method
       try {
-        result = await sendContactEmailAlternative(sanitizedData);
+        const result = await sendContactEmailAlternative(sanitizedData);
         console.log('✅ Alternative email method result:', result);
+        
+        if (result.success) {
+          console.log('🎉 Email sent successfully via alternative method!');
+          return NextResponse.json(
+            { 
+              message: 'Message sent successfully! I will get back to you soon.',
+              details: {
+                notificationId: result.notificationId,
+                status: result.status,
+              }
+            },
+            { status: 200 }
+          );
+        } else {
+          throw new Error(result.error || 'Alternative method failed');
+        }
+        
       } catch (alternativeError) {
         console.error('💥 Both methods failed!');
         console.error('Alternative error:', alternativeError);
-        throw alternativeError;
+        
+        return NextResponse.json(
+          { 
+            error: 'Failed to send message. Please try again later.',
+            details: alternativeError instanceof Error ? alternativeError.message : 'Unknown error'
+          },
+          { status: 500 }
+        );
       }
-    }
-    
-    if (result.success) {
-      console.log('🎉 Email sent successfully to codewithad24@gmail.com!');
-      return NextResponse.json(
-        { 
-          message: 'Message sent successfully! I will get back to you soon.',
-          details: {
-            notificationId: result.notificationId,
-            status: result.status,
-          }
-        },
-        { status: 200 }
-      );
-    } else {
-      console.error('❌ Email sending failed:', result.error);
-      return NextResponse.json(
-        { error: result.error || 'Failed to send message' },
-        { status: 500 }
-      );
     }
     
   } catch (error) {

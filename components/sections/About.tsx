@@ -144,7 +144,7 @@ export default function AboutSection() {
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
-                              src="https://abped-college-dashboard.s3.us-east-2.amazonaws.com/tted/college-backend/college/d7dfe448-aba2-4dac-9878-1d7a70181ae0.png"
+                              src="/adamas.png"
                               alt="Adamas University"
                               width={48}
                               height={48}
@@ -181,7 +181,7 @@ export default function AboutSection() {
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
-                              src="https://imgs.search.brave.com/L0qvvolyKO8siG5g82Xg17X2h6Fh3yga9JZGQU8Mgcw/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9ibG9n/Z2VyLmdvb2dsZXVz/ZXJjb250ZW50LmNv/bS9pbWcvYi9SMjl2/WjJ4bC9BVnZYc0Vp/SE1Nb29kdk42UVFE/VUQ1R0t2MTdfQ3hT/djdIdDlZOHMydFlR/WUZ5czg4TnJSVzNL/R3ltdDVPUm01cUh0/LU1aSVpZZjM3eVlW/LTg2VFFkdEc5MzNE/aGJqbWhETUZEUWx5/dGZXcWVjUlhFN182/dXVWYUhBV1BpeDJX/cnc0Z0UwM3NkVG1S/OXVTNnhZUS9zMTYw/MC9rdnMtbG9nby1j/b2xvdXIuanBn"
+                              src="/kvs.png"
                               alt="Kendriya Vidyalaya"
                               width={48}
                               height={48}
@@ -209,7 +209,7 @@ export default function AboutSection() {
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
-                              src="https://as2.ftcdn.net/v2/jpg/14/11/91/85/1000_F_1411918531_xtAaS4QYKiqaJxQHO4KAvRaP5JCpOjGD.jpg"
+                              src="/learning.png"
                               alt="Continuous Learning"
                               width={48}
                               height={48}

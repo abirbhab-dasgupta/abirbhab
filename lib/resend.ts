@@ -1,10 +1,14 @@
 import { Resend } from 'resend';
 
-if (!process.env.RESEND_API_KEY) {
+// Check for environment variable
+const RESEND_API_KEY = process.env.RESEND_API_KEY;
+
+if (!RESEND_API_KEY) {
+  console.error('❌ RESEND_API_KEY is not set in environment variables');
   throw new Error('RESEND_API_KEY is not set');
 }
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resend = new Resend(RESEND_API_KEY);
 
 export interface ContactFormData {
   fullName: string;
@@ -12,17 +16,39 @@ export interface ContactFormData {
   message: string;
 }
 
-export async function sendContactEmail(data: ContactFormData) {
+interface EmailResponse {
+  success: boolean;
+  notificationId?: string;
+  status?: string;
+  error?: string;
+}
+
+interface SuccessResponse {
+  success: true;
+  notificationId: string;
+  status: string;
+}
+
+interface ErrorResponse {
+  success: false;
+  error: string;
+}
+
+export async function sendContactEmail(data: ContactFormData): Promise<SuccessResponse | ErrorResponse> {
   console.log('🚀 Starting email send process...');
-  console.log('📧 Form data:', { fullName: data.fullName, email: data.email, messageLength: data.message.length });
+  console.log('📧 Form data:', { 
+    fullName: data.fullName, 
+    email: data.email, 
+    messageLength: data.message.length 
+  });
 
   try {
     // Send notification email to YOU ONLY
     console.log('📨 Sending notification email to codewithad24@gmail.com...');
 
-    const notificationEmail = await resend.emails.send({
+    const emailPayload = {
       from: 'onboarding@resend.dev',
-      to: ['codewithad24@gmail.com'],
+      to: 'codewithad24@gmail.com',
       subject: `🔔 New Contact Form Submission from ${data.fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
@@ -64,25 +90,29 @@ ${data.message}
           </div>
         </div>
       `,
-      reply_to: [data.email], // This allows you to reply directly to the user
-    });
+      replyTo: data.email,
+    };
 
-    console.log('✅ Notification email response:', notificationEmail);
+    const notificationResult = await resend.emails.send(emailPayload);
+
+    console.log('✅ Notification email response:', notificationResult);
 
     // Check if email was sent successfully
-    if (notificationEmail.error) {
-      console.error('❌ Notification email error:', notificationEmail.error);
+    if (notificationResult.error) {
+      console.error('❌ Notification email error:', notificationResult.error);
       return {
         success: false,
-        error: notificationEmail.error,
-      };
+        error: typeof notificationResult.error === 'string' 
+          ? notificationResult.error 
+          : notificationResult.error.message || 'Failed to send notification email',
+      } as ErrorResponse;
     }
 
     return {
       success: true,
-      notificationId: notificationEmail.data?.id,
+      notificationId: notificationResult.data?.id || 'unknown',
       status: 'sent',
-    };
+    } as SuccessResponse;
 
   } catch (error) {
     console.error('💥 CRITICAL ERROR sending email:', error);
@@ -96,27 +126,23 @@ ${data.message}
       });
     }
 
-    // If it's a Resend API error, log more details
-    if (error && typeof error === 'object' && 'message' in error) {
-      console.error('Resend API Error:', error);
-    }
-
     return {
       success: false,
       error: error instanceof Error ? error.message : 'Failed to send email',
-    };
+    } as ErrorResponse;
   }
 }
 
 // Simplified alternative function
-export async function sendContactEmailAlternative(data: ContactFormData) {
+export async function sendContactEmailAlternative(data: ContactFormData): Promise<SuccessResponse | ErrorResponse> {
   console.log('🔄 Trying alternative approach...');
 
   try {
     console.log('📧 Sending notification email (alternative method)...');
-    const notificationResult = await resend.emails.send({
+    
+    const emailPayload = {
       from: 'onboarding@resend.dev',
-      to: ['codewithad24@gmail.com'],
+      to: 'codewithad24@gmail.com',
       subject: `🔔 New Contact: ${data.fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f4;">
@@ -148,15 +174,25 @@ ${data.message}
           </div>
         </div>
       `,
-      reply_to: [data.email],
-    });
+      replyTo: data.email,
+    };
+
+    const notificationResult = await resend.emails.send(emailPayload);
 
     console.log('📧 Notification result:', notificationResult);
 
+    if (notificationResult.error) {
+      const errorMessage = typeof notificationResult.error === 'string' 
+        ? notificationResult.error 
+        : notificationResult.error.message || 'Failed to send email';
+      throw new Error(errorMessage);
+    }
+
     return {
       success: true,
-      notificationId: notificationResult.data?.id,
-    };
+      notificationId: notificationResult.data?.id || 'unknown',
+      status: 'sent',
+    } as SuccessResponse;
 
   } catch (error) {
     console.error('💥 Alternative method failed:', error);
