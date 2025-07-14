@@ -1,21 +1,21 @@
 "use client"
 
 import { motion, AnimatePresence } from "motion/react"
-import { Home, Code, Briefcase, Mail, Menu, X, CircleUserRound, FolderCodeIcon, Code2Icon } from "lucide-react"
-import { useState, useEffect } from "react"
+import { Home, Mail, Menu, X, CircleUserRound, FolderCodeIcon, Code2Icon } from "lucide-react"
+import { useState, useEffect, useMemo } from "react"
 
 export function Navbar() {
   const [activeSection, setActiveSection] = useState("home")
   const [hoveredItem, setHoveredItem] = useState<string | null>(null)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
-  const navItems = [
+  const navItems = useMemo(() => [
     { id: "home", icon: Home, label: "Home" },
     { id: "about", icon: CircleUserRound, label: "About" },
     { id: "projects", icon: FolderCodeIcon, label: "Projects" },
     { id: "skills", icon: Code2Icon, label: "Skills" },
     { id: "contact", icon: Mail, label: "Contact" },
-  ]
+  ], []);
 
   // Scroll to section function
   const scrollToSection = (sectionId: string) => {

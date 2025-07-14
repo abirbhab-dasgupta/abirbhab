@@ -384,7 +384,7 @@ export default function ContactSection() {
               >
                 <div className="absolute top-0 left-0 w-8 h-8 bg-orange-500/20 rounded-full blur-lg" />
                 <div className="relative z-10">
-                  <div className="text-4xl text-orange-400 mb-4">"</div>
+                  <div className="text-4xl text-orange-400 mb-4">&quot;</div>
                   <p className="text-white/60 italic mb-4 leading-relaxed">
                     Great things are built by great teams. Let&apos;s create something amazing together.
                   </p>

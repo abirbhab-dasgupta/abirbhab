@@ -2,7 +2,7 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react"
 import { ArrowRight, ExternalLink } from "lucide-react"
-import { useState, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 
 // Embedded background paths component with original shapes but positioned lower
 function FloatingPaths({ position }: { position: number }) {
@@ -284,7 +284,7 @@ export default function HeroSection() {
                 />
 
                 <span className="relative z-10 flex items-center justify-center space-x-3 text-md">
-                  <span>Let's Connect</span>
+                  <span>Let&apos;s Connect</span>
                   <motion.div className="group-hover:rotate-45 transition-transform duration-300">
                     <ExternalLink size={20} />
                   </motion.div>
