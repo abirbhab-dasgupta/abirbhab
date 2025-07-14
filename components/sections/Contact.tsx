@@ -74,22 +74,30 @@ export default function ContactSection() {
     setSubmission({ status: "loading", message: "" })
 
     try {
-      await new Promise((resolve) => setTimeout(resolve, 2000))
-      const isSuccess = Math.random() > 0.3
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      })
 
-      if (isSuccess) {
+      const result = await response.json()
+
+      if (response.ok) {
         setSubmission({
           status: "success",
-          message: "Thank you! Your message has been sent successfully.",
+          message: "Thank you! Your message has been sent successfully. You'll receive a confirmation email shortly.",
         })
         setFormData({ fullName: "", email: "", message: "" })
       } else {
         setSubmission({
           status: "error",
-          message: "Sorry, there was an error sending your message. Please try again.",
+          message: result.error || "Sorry, there was an error sending your message. Please try again.",
         })
       }
     } catch (error) {
+      console.error('Form submission error:', error)
       setSubmission({
         status: "error",
         message: "Sorry, there was an error sending your message. Please try again.",
