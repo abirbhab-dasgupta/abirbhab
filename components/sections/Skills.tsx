@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion"
 import { skillsData } from "@/data"
+import Image from "next/image";
 
 export default function Component() {
   return (
@@ -44,10 +45,11 @@ export default function Component() {
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
-                  <img
+                  <Image
                     src={skill.image || "/placeholder.svg"}
                     alt={skill.name}
-                    className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -68,10 +70,11 @@ export default function Component() {
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
-                  <img
+                  <Image
                     src={skill.image || "/placeholder.svg"}
                     alt={skill.name}
-                    className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -92,10 +95,11 @@ export default function Component() {
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
-                  <img
+                  <Image
                     src={skill.image || "/placeholder.svg"}
                     alt={skill.name}
-                    className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -116,10 +120,11 @@ export default function Component() {
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
-                  <img
+                  <Image
                     src={skill.image || "/placeholder.svg"}
                     alt={skill.name}
-                    className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -140,10 +145,11 @@ export default function Component() {
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
-                  <img
+                  <Image
                     src={skill.image || "/placeholder.svg"}
                     alt={skill.name}
-                    className="w-8 h-8 md:w-10 md:h-10 object-contain"
+                    width={32}
+                    height={32}
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">

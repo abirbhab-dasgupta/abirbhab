@@ -78,17 +78,17 @@ export default function AboutSection() {
                   <h3 className="text-2xl font-light mb-6 text-white/60">Who I Am</h3>
                   <div className="space-y-4">
                     <p className="text-white/70">
-                      I'm a passionate full-stack developer with over 2 years of experience creating modern web
+                      I&apos;m a passionate full-stack developer with over 2 years of experience creating modern web
                       applications. Based in Kolkata, I combine technical expertise with creative problem-solving to
                       build digital solutions that make an impact.
                     </p>
                     <p className="text-white/70">
                       My journey in web development began during school, where I discovered my love for coding. Since
-                      then, I've worked with startups and agencies, helping them achieve their digital goals through
+                      then, I&apos;ve worked with startups and agencies, helping them achieve their digital goals through
                       thoughtful and efficient development.
                     </p>
                     <p className="text-white/70">
-                      When I'm not coding, you can find me hiking in the mountains, experimenting with new cooking
+                      When I&apos;m not coding, you can find me hiking in the mountains, experimenting with new cooking
                       recipes, or contributing to open-source projects.
                     </p>
                   </div>

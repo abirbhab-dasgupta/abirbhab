@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { motion } from "framer-motion"
-import { Github, Linkedin, Mail, Send, CheckCircle, AlertCircle, MapPin, Clock, Phone } from "lucide-react"
+import { Github, Linkedin, Mail, Send, CheckCircle, AlertCircle } from "lucide-react"
 
 interface FormData {
   fullName: string
@@ -157,7 +157,7 @@ export default function ContactSection() {
               whileHover={{ scale: 1.05 }}
               transition={{ type: "spring", stiffness: 300 }}
             >
-              Let's{" "}
+              Let&apos;s{" "}
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 ">Connect</span>
             </motion.h2>
           </motion.div>
@@ -168,9 +168,9 @@ export default function ContactSection() {
             transition={{ delay: 0.3, duration: 0.8 }}
             viewport={{ once: true }}
           >
-            Ready to bring your ideas to life? I'm here to help you create something extraordinary.
+            Ready to bring your ideas to life? I&apos;m always open to discuss new projects, collaborations, or just say hello.
             <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 ">Let's start a conversation.</span>
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-orange-500 to-orange-600 ">Let&apos;s connect.</span>
           </motion.p>
         </motion.div>
 
@@ -386,7 +386,7 @@ export default function ContactSection() {
                 <div className="relative z-10">
                   <div className="text-4xl text-orange-400 mb-4">"</div>
                   <p className="text-white/60 italic mb-4 leading-relaxed">
-                    Great things are built by great teams. Let's create something amazing together.
+                    Great things are built by great teams. Let&apos;s create something amazing together.
                   </p>
                   <div className="text-sm text-orange-300 font-medium">— Ready to collaborate</div>
                 </div>
