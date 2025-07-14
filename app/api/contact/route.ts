@@ -67,7 +67,7 @@ export async function POST(request: NextRequest) {
           message: 'Message sent successfully! I will get back to you soon.',
           details: {
             notificationId: result.notificationId,
-            status: result.status,
+            status: result.status ?? null,
           }
         },
         { status: 200 }
