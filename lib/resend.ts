@@ -16,13 +16,6 @@ export interface ContactFormData {
   message: string;
 }
 
-interface EmailResponse {
-  success: boolean;
-  notificationId?: string;
-  status?: string;
-  error?: string;
-}
-
 interface SuccessResponse {
   success: true;
   notificationId: string;
