@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, AnimatePresence } from "motion/react"
-import { Home, Code, Briefcase, Mail, Menu, X, CircleUserRound, Folder, FoldHorizontal, FolderClock, FolderArchiveIcon, FolderCodeIcon, Code2Icon } from "lucide-react"
+import { Home, Code, Briefcase, Mail, Menu, X, CircleUserRound, FolderCodeIcon, Code2Icon } from "lucide-react"
 import { useState, useEffect } from "react"
 
 export function Navbar() {
@@ -52,7 +52,7 @@ export function Navbar() {
     handleScroll() // Check initial position
 
     return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  }, [navItems])
 
   // Close mobile menu when clicking outside
   useEffect(() => {
