@@ -188,12 +188,7 @@ export default function HeroSection() {
                     key={`${wordIndex}-${letterIndex}`}
                     initial={{ y: 100, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{
-                      delay: wordIndex * 0.1 + letterIndex * 0.03,
-                      type: "spring",
-                      stiffness: 150,
-                      damping: 25,
-                    }}
+                    transition={{ duration: 2 }}
                     className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60"
                   >
                     {letter}
