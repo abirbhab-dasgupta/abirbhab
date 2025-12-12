@@ -29,10 +29,10 @@ interface ErrorResponse {
 
 export async function sendContactEmail(data: ContactFormData): Promise<SuccessResponse | ErrorResponse> {
   console.log('🚀 Starting email send process...');
-  console.log('📧 Form data:', { 
-    fullName: data.fullName, 
-    email: data.email, 
-    messageLength: data.message.length 
+  console.log('📧 Form data:', {
+    fullName: data.fullName,
+    email: data.email,
+    messageLength: data.message.length
   });
 
   try {
@@ -91,13 +91,15 @@ ${data.message}
     console.log('✅ Notification email response:', notificationResult);
 
     // Check if email was sent successfully
-    if (notificationResult.error) {
-      console.error('❌ Notification email error:', notificationResult.error);
+    // Check if email was sent successfully
+    const result: any = notificationResult;
+    if (result.error) {
+      console.error('❌ Notification email error:', result.error);
       return {
         success: false,
-        error: typeof notificationResult.error === 'string' 
-          ? notificationResult.error 
-          : notificationResult.error.message || 'Failed to send notification email',
+        error: typeof result.error === 'string'
+          ? result.error
+          : result.error.message || 'Failed to send notification email',
       } as ErrorResponse;
     }
 
@@ -132,7 +134,7 @@ export async function sendContactEmailAlternative(data: ContactFormData): Promis
 
   try {
     console.log('📧 Sending notification email (alternative method)...');
-    
+
     const emailPayload = {
       from: 'onboarding@resend.dev',
       to: 'codewithad24@gmail.com',
@@ -174,10 +176,11 @@ ${data.message}
 
     console.log('📧 Notification result:', notificationResult);
 
-    if (notificationResult.error) {
-      const errorMessage = typeof notificationResult.error === 'string' 
-        ? notificationResult.error 
-        : notificationResult.error.message || 'Failed to send email';
+    const result: any = notificationResult;
+    if (result.error) {
+      const errorMessage = typeof result.error === 'string'
+        ? result.error
+        : result.error.message || 'Failed to send email';
       throw new Error(errorMessage);
     }
 
