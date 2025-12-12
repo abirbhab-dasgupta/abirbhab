@@ -89,9 +89,11 @@ export default function AboutSection() {
                       thoughtful and efficient development.
                     </p>
                     <p className="text-white/70">
-                      When I&apos;m not coding, you can find me hiking in the mountains, experimenting with new cooking
-                      recipes, or contributing to open-source projects.
+                      I enjoy working on real-world projects, finding effective solutions to complex problems,
+                      and continuously learning new skills to improve my craft.
                     </p>
+
+
                   </div>
 
                   <div className="mt-8 grid grid-cols-2 gap-4">
