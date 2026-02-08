@@ -42,7 +42,7 @@ export async function sendContactEmail(data: ContactFormData): Promise<SuccessRe
     const emailPayload = {
       from: 'onboarding@resend.dev',
       to: 'codewithad24@gmail.com',
-      subject: `🔔 New Contact Form Submission from ${data.fullName}`,
+      subject: `New Contact Form Submission from ${data.fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f9f9f9;">
           <div style="background-color: #ffffff; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1);">
@@ -138,7 +138,7 @@ export async function sendContactEmailAlternative(data: ContactFormData): Promis
     const emailPayload = {
       from: 'onboarding@resend.dev',
       to: 'codewithad24@gmail.com',
-      subject: `🔔 New Contact: ${data.fullName}`,
+      subject: `New Contact: ${data.fullName}`,
       html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; background-color: #f4f4f4;">
           <div style="background-color: white; padding: 30px; border-radius: 10px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">

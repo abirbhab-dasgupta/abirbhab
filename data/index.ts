@@ -13,7 +13,7 @@ export const projects = [
     title: "Invoice Generator",
     des: "A modern web application for creating professional invoices with real-time preview and PDF export. Built for freelancers and small businesses with a user-friendly interface and responsive design.",
     img: "/project5.png",
-    iconLists: ["/nextjs.png", "/tailwindcss.png", "/typescript.png"],
+    iconLists: ["/nextjs.svg", "/tailwindcss.png", "/typescript.png"],
     link: "https://invoicegenerator-abirbhab.vercel.app/",
     githubLink: "https://github.com/abirbhab-dasgupta/invoice-generator",
   },

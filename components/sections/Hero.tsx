@@ -3,130 +3,7 @@
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react"
 import { ArrowRight, ExternalLink } from "lucide-react"
 import { useEffect, useRef } from "react"
-
-// Embedded background paths component with original shapes but positioned lower
-function FloatingPaths({ position }: { position: number }) {
-  const paths = Array.from({ length: 36 }, (_, i) => ({
-    id: i,
-    d: `M-${380 - i * 5 * position} -${189 + i * 6}C-${
-      380 - i * 5 * position
-    } -${189 + i * 6} -${312 - i * 5 * position} ${216 - i * 6} ${
-      152 - i * 5 * position
-    } ${343 - i * 6}C${616 - i * 5 * position} ${470 - i * 6} ${
-      684 - i * 5 * position
-    } ${875 - i * 6} ${684 - i * 5 * position} ${875 - i * 6}`,
-    width: 0.5 + i * 0.03,
-  }))
-
-  return (
-    <div className="absolute inset-0 pointer-events-none z-0 -translate-y-13">
-      <svg className="w-full h-full text-white/70" viewBox="0 0 696 316" fill="none">
-        {paths.map((path) => (
-          <motion.path
-            key={path.id}
-            d={path.d}
-            stroke="currentColor"
-            strokeWidth={path.width}
-            strokeOpacity={0.1 + path.id * 0.03}
-            initial={{ pathLength: 0.3, opacity: 0.6 }}
-            animate={{
-              pathLength: 1,
-              opacity: [0.3, 0.6, 0.3],
-              pathOffset: [0, 1, 0],
-            }}
-            transition={{
-              duration: 20 + Math.random() * 10,
-              repeat: Number.POSITIVE_INFINITY,
-              ease: "linear",
-            }}
-          />
-        ))}
-      </svg>
-    </div>
-  )
-}
-
-// New floating shapes component
-function FloatingShapes() {
-  const shapes = [
-    // Left side - only 2 shapes
-    { type: "circle", size: 50, x: "8%", y: "25%", delay: 0, color: "from-orange-500/20 to-red-500/20" },
-    { type: "hexagon", size: 40, x: "15%", y: "70%", delay: 3, color: "from-red-600/15 to-orange-400/15" },
-
-    // Right side - majority of shapes
-    { type: "circle", size: 60, x: "85%", y: "15%", delay: 1, color: "from-red-400/15 to-orange-600/15" },
-    { type: "square", size: 45, x: "75%", y: "35%", delay: 2, color: "from-orange-400/15 to-red-600/15" },
-    { type: "triangle", size: 50, x: "90%", y: "55%", delay: 1.5, color: "from-red-500/20 to-orange-500/20" },
-    { type: "hexagon", size: 55, x: "70%", y: "75%", delay: 4, color: "from-orange-600/12 to-red-500/12" },
-    { type: "circle", size: 35, x: "82%", y: "80%", delay: 2.5, color: "from-red-700/18 to-orange-400/18" },
-  ]
-
-  return (
-    <div className="absolute inset-0 pointer-events-none z-0 overflow-hidden">
-      {shapes.map((shape, index) => (
-        <motion.div
-          key={index}
-          className="absolute"
-          style={{
-            left: shape.x,
-            top: shape.y,
-            width: shape.size,
-            height: shape.size,
-          }}
-          initial={{ opacity: 0, scale: 0, rotate: 0 }}
-          animate={{
-            opacity: [0, 1, 0.8, 1],
-            scale: [0, 1, 1.1, 1],
-            rotate: [0, 180, 360],
-            y: [0, -20, 0, -10, 0],
-          }}
-          transition={{
-            duration: 15 + Math.random() * 10,
-            delay: shape.delay,
-            repeat: Number.POSITIVE_INFINITY,
-            ease: "easeInOut",
-          }}
-        >
-          {shape.type === "circle" && (
-            <div
-              className={`w-full h-full rounded-full bg-gradient-to-br ${shape.color} backdrop-blur-sm border border-white/5`}
-            />
-          )}
-
-          {shape.type === "square" && (
-            <motion.div
-              className={`w-full h-full bg-gradient-to-br ${shape.color} backdrop-blur-sm border border-white/5`}
-              animate={{ rotate: [0, 90, 180, 270, 360] }}
-              transition={{
-                duration: 20,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "linear",
-              }}
-            />
-          )}
-
-          {shape.type === "triangle" && (
-            <div
-              className={`w-full h-full bg-gradient-to-br ${shape.color} backdrop-blur-sm border border-white/5`}
-              style={{
-                clipPath: "polygon(50% 0%, 0% 100%, 100% 100%)",
-              }}
-            />
-          )}
-
-          {shape.type === "hexagon" && (
-            <div
-              className={`w-full h-full bg-gradient-to-br ${shape.color} backdrop-blur-sm border border-white/5`}
-              style={{
-                clipPath: "polygon(25% 0%, 75% 0%, 100% 50%, 75% 100%, 25% 100%, 0% 50%)",
-              }}
-            />
-          )}
-        </motion.div>
-      ))}
-    </div>
-  )
-}
+import HeroBackground from "../ui/HeroBackground"
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
@@ -162,15 +39,7 @@ export default function HeroSection() {
 
   return (
     <section id="home" className="relative z-10 min-h-screen flex items-start justify-center pt-48 overflow-hidden">
-      {/* Background gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-red-950/10 via-transparent to-transparent "></div>
-
-      {/* Original floating paths */}
-      <FloatingPaths position={1} />
-      <FloatingPaths position={-1} />
-
-      {/* New floating shapes */}
-      <FloatingShapes />
+      <HeroBackground />
 
       {/* Hero Content */}
       <div className="relative z-10 container mx-auto px-4 md:px-6 text-center mt-16">

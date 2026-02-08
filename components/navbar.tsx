@@ -81,8 +81,8 @@ export function Navbar() {
           }}
           className="relative"
         >
-          {/* Main navbar container with glassmorphism */}
-          <div className="bg-gray-800/25 backdrop-blur-xl rounded-2xl px-6 py-4 border border-gray-600/20 shadow-2xl">
+          {/* Main navbar – dark glass with vibrant orange accent to match hero */}
+          <div className="bg-[#0C0203]/90 backdrop-blur-xl rounded-2xl px-6 py-4 border border-orange-500/30 shadow-2xl shadow-orange-500/10">
             <div className="flex items-center space-x-8">
               {navItems.map((item, index) => (
                 <motion.div
@@ -93,11 +93,10 @@ export function Navbar() {
                   transition={{ delay: 0.1 * index + 0.3 }}
                 >
                   <motion.div
-                    className={`relative p-3 rounded-xl transition-all duration-300 cursor-pointer ${
-                      activeSection === item.id
-                        ? "bg-orange-700/80 text-white shadow-md"
-                        : "text-white hover:bg-orange-700/40"
-                    }`}
+                    className={`relative p-3 rounded-xl transition-all duration-300 cursor-pointer ${activeSection === item.id
+                      ? "bg-orange-500/90 text-white shadow-lg shadow-orange-500/25"
+                      : "text-white hover:bg-orange-500/25"
+                      }`}
                     onClick={() => scrollToSection(item.id)}
                     onMouseEnter={() => setHoveredItem(item.id)}
                     onMouseLeave={() => setHoveredItem(null)}
@@ -122,10 +121,10 @@ export function Navbar() {
                     }}
                     transition={{ duration: 0.2 }}
                   >
-                    <div className="bg-gray-800/95 backdrop-blur-sm text-white text-sm px-3 py-2 rounded-lg border border-gray-600/50 shadow-xl whitespace-nowrap">
+                    <div className="bg-[#0C0203]/95 backdrop-blur-sm text-white text-sm px-3 py-2 rounded-lg border border-orange-500/35 shadow-xl shadow-orange-500/5 whitespace-nowrap">
                       {item.label}
                       {/* Tooltip arrow */}
-                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-gray-800 border-l border-t border-gray-600/50 rotate-45" />
+                      <div className="absolute -top-1 left-1/2 transform -translate-x-1/2 w-2 h-2 bg-[#0C0203] border-l border-t border-orange-500/35 rotate-45" />
                     </div>
                   </motion.div>
                 </motion.div>
@@ -138,7 +137,7 @@ export function Navbar() {
       {/* Mobile Navbar */}
       <div className="fixed top-6 right-6 z-50 md:hidden">
         <motion.button
-          className="hamburger-btn bg-gray-800/25 backdrop-blur-xl rounded-2xl p-4 border border-gray-600/20 shadow-2xl text-white"
+          className="hamburger-btn bg-[#0C0203]/90 backdrop-blur-xl rounded-2xl p-4 border border-orange-500/30 shadow-2xl shadow-orange-500/10 text-white"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -154,7 +153,7 @@ export function Navbar() {
         <AnimatePresence>
           {isMobileMenuOpen && (
             <motion.div
-              className="mobile-menu fixed top-20 right-6 bg-gray-800/25 backdrop-blur-xl rounded-2xl border border-gray-600/20 shadow-2xl overflow-hidden"
+              className="mobile-menu fixed top-20 right-6 bg-[#0C0203]/95 backdrop-blur-xl rounded-2xl border border-orange-500/30 shadow-2xl shadow-orange-500/10 overflow-hidden"
               initial={{ opacity: 0, scale: 0.8, y: -20 }}
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.8, y: -20 }}
@@ -169,9 +168,8 @@ export function Navbar() {
                     transition={{ delay: index * 0.1 }}
                   >
                     <motion.button
-                      className={`w-full flex items-center space-x-3 px-6 py-4 text-left transition-all duration-300 ${
-                        activeSection === item.id ? "bg-gray-700/80 text-white" : "text-white hover:bg-gray-700/40"
-                      }`}
+                      className={`w-full flex items-center space-x-3 px-6 py-4 text-left transition-all duration-300 ${activeSection === item.id ? "bg-orange-500/80 text-white" : "text-white hover:bg-orange-500/20"
+                        }`}
                       onClick={() => scrollToSection(item.id)}
                       whileTap={{ scale: 0.98 }}
                     >

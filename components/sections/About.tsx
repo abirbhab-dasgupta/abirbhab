@@ -8,8 +8,17 @@ export default function AboutSection() {
   return (
     <section
       id="about"
-      className="relative min-h-screen w-full py-20 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden"
+      className="relative min-h-screen w-full py-20 px-4 sm:px-6 lg:px-8 overflow-hidden"
     >
+      {/* Seamless blend from hero: subtle warm gradient at top, matches page #0C0203 */}
+      <div className="absolute inset-0 pointer-events-none bg-[#0C0203]" />
+      <div
+        className="absolute inset-x-0 top-0 h-80 pointer-events-none"
+        style={{
+          background: "linear-gradient(to bottom, rgba(180, 90, 40, 0.04) 0%, transparent 100%)",
+        }}
+      />
+
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 pointer-events-none">
         <motion.div
@@ -98,25 +107,25 @@ export default function AboutSection() {
 
                   <div className="mt-8 grid grid-cols-2 gap-4">
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-500/30 to-transparent">
-                      <div className="bg-[#0a0a1a]/80 backdrop-blur-sm p-4 rounded-xl h-full">
-                        <div className="text-3xl font-light text-orange-400 mb-2">2+</div>
+                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
+                        <div className="text-3xl font-light text-orange-400 mb-2">3+</div>
                         <div className="text-white/80 text-sm">Years of Experience</div>
                       </div>
                     </div>
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-600/30 to-transparent">
-                      <div className="bg-[#0a0a1a]/80 backdrop-blur-sm p-4 rounded-xl h-full">
+                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
                         <div className="text-3xl font-light text-orange-500 mb-2">30+</div>
                         <div className="text-white/80 text-sm">Projects Completed</div>
                       </div>
                     </div>
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-400/30 to-transparent">
-                      <div className="bg-[#0a0a1a]/80 backdrop-blur-sm p-4 rounded-xl h-full">
+                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
                         <div className="text-3xl font-light text-orange-300 mb-2">10+</div>
                         <div className="text-white/80 text-sm">Happy Clients</div>
                       </div>
                     </div>
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-500/30 to-transparent">
-                      <div className="bg-[#0a0a1a]/80 backdrop-blur-sm p-4 rounded-xl h-full">
+                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
                         <div className="text-3xl font-light text-orange-400 mb-2">5+</div>
                         <div className="text-white/80 text-sm">Open Source Contributions</div>
                       </div>
@@ -142,7 +151,7 @@ export default function AboutSection() {
 
                   <div className="space-y-6">
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-500/30 via-orange-500/10 to-transparent">
-                      <div className="bg-[#0a0a1a]/80 backdrop-blur-sm p-6 rounded-xl">
+                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-6 rounded-xl">
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
@@ -179,7 +188,7 @@ export default function AboutSection() {
                     </div>
 
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-600/30 via-orange-600/10 to-transparent">
-                      <div className="bg-[#0a0a1a]/80 backdrop-blur-sm p-6 rounded-xl">
+                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-6 rounded-xl">
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
@@ -207,7 +216,7 @@ export default function AboutSection() {
                     </div>
 
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-400/30 via-orange-400/10 to-transparent">
-                      <div className="bg-[#0a0a1a]/80 backdrop-blur-sm p-6 rounded-xl">
+                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-6 rounded-xl">
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
