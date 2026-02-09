@@ -2,11 +2,12 @@
 
 import { motion, useMotionValue, useSpring, useTransform } from "motion/react"
 import { ArrowRight, ExternalLink } from "lucide-react"
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import HeroBackground from "../ui/HeroBackground"
 
 export default function HeroSection() {
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isTouch, setIsTouch] = useState(true)
 
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
@@ -15,7 +16,20 @@ export default function HeroSection() {
   const mouseXSpring = useSpring(mouseX, springConfig)
   const mouseYSpring = useSpring(mouseY, springConfig)
 
+  const [isMobile, setIsMobile] = useState(true)
+
   useEffect(() => {
+    const hasHover = window.matchMedia("(hover: hover)").matches
+    setIsTouch(!hasHover)
+    const mq = window.matchMedia("(max-width: 768px)")
+    setIsMobile(mq.matches)
+    const onResize = () => setIsMobile(window.matchMedia("(max-width: 768px)").matches)
+    mq.addEventListener("change", onResize)
+    return () => mq.removeEventListener("change", onResize)
+  }, [])
+
+  useEffect(() => {
+    if (isTouch) return
     const handleMouseMove = (e: MouseEvent) => {
       if (containerRef.current) {
         const rect = containerRef.current.getBoundingClientRect()
@@ -25,10 +39,9 @@ export default function HeroSection() {
         mouseY.set((y - rect.height / 2) / 10)
       }
     }
-
     window.addEventListener("mousemove", handleMouseMove)
     return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [mouseX, mouseY])
+  }, [isTouch, mouseX, mouseY])
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId)
@@ -50,21 +63,32 @@ export default function HeroSection() {
           className="max-w-3xl mx-auto"
         >
           <h1 className="text-5xl sm:text-7xl md:text-8xl font-bold mb-8 tracking-tighter">
-            {["Abirbhab", "Dasgupta"].map((word, wordIndex) => (
-              <span key={wordIndex} className="inline-block mr-4 last:mr-0">
-                {word.split("").map((letter, letterIndex) => (
-                  <motion.span
-                    key={`${wordIndex}-${letterIndex}`}
-                    initial={{ y: 100, opacity: 0 }}
-                    animate={{ y: 0, opacity: 1 }}
-                    transition={{ duration: 2 }}
-                    className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60"
-                  >
-                    {letter}
-                  </motion.span>
-                ))}
-              </span>
-            ))}
+            {isMobile ? (
+              <motion.span
+                initial={{ y: 40, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.8 }}
+                className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60"
+              >
+                Abirbhab Dasgupta
+              </motion.span>
+            ) : (
+              ["Abirbhab", "Dasgupta"].map((word, wordIndex) => (
+                <span key={wordIndex} className="inline-block mr-4 last:mr-0">
+                  {word.split("").map((letter, letterIndex) => (
+                    <motion.span
+                      key={`${wordIndex}-${letterIndex}`}
+                      initial={{ y: 100, opacity: 0 }}
+                      animate={{ y: 0, opacity: 1 }}
+                      transition={{ duration: 2 }}
+                      className="inline-block text-transparent bg-clip-text bg-gradient-to-r from-white to-white/60"
+                    >
+                      {letter}
+                    </motion.span>
+                  ))}
+                </span>
+              ))
+            )}
           </h1>
 
           <p className="text-xl text-white/70 mb-6">
@@ -104,12 +128,14 @@ export default function HeroSection() {
                   y: useTransform(mouseYSpring, [-50, 50], [-2, 2]),
                 }}
               >
-                {/* Button Background Effects */}
-                <motion.div
-                  className="absolute inset-0 bg-gradient-to-r from-red-400/20 to-rose-500/20 rounded-2xl blur-xl"
-                  animate={{ opacity: [0.5, 0.8, 0.5] }}
-                  transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
-                />
+                {/* Button Background Effects — no infinite animation on mobile */}
+                {!isMobile && (
+                  <motion.div
+                    className="absolute inset-0 bg-gradient-to-r from-red-400/20 to-rose-500/20 rounded-2xl blur-xl"
+                    animate={{ opacity: [0.5, 0.8, 0.5] }}
+                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                  />
+                )}
 
                 <motion.div
                   className="absolute inset-0 bg-white/10 rounded-2xl"
@@ -121,8 +147,8 @@ export default function HeroSection() {
                 <span className="relative z-10 flex items-center justify-center space-x-3 text-md">
                   <span>Explore My Work</span>
                   <motion.div
-                    animate={{ x: [0, 4, 0] }}
-                    transition={{ duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
+                    animate={isMobile ? { x: 0 } : { x: [0, 4, 0] }}
+                    transition={isMobile ? {} : { duration: 1.5, repeat: Number.POSITIVE_INFINITY }}
                   >
                     <ArrowRight size={20} />
                   </motion.div>
