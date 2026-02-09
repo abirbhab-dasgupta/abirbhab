@@ -2,9 +2,14 @@
 
 import { motion } from "framer-motion"
 import { skillsData } from "@/data"
-import Image from "next/image";
+import Image from "next/image"
+import { useIsMobile } from "@/lib/use-mobile"
+
+const skillCardClass = (isMobile: boolean) =>
+  `group relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-orange-500/5 to-orange-600/10 border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-105 md:hover:scale-110 hover:shadow-lg hover:shadow-orange-500/25 ${isMobile ? "" : "backdrop-blur-sm"}`
 
 export default function Component() {
+  const isMobile = useIsMobile()
   return (
     <section id="skills" className="relative min-h-screen w-full overflow-hidden bg-transparent pt-20">
        
@@ -41,7 +46,7 @@ export default function Component() {
             {skillsData.slice(0, 6).map((skill, index) => (
               <div
                 key={`row1-${index}`}
-                className="group relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/25"
+                className={skillCardClass(isMobile)}
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
@@ -53,7 +58,7 @@ export default function Component() {
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded backdrop-blur-sm">
+                  <span className={`text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded ${isMobile ? "" : "backdrop-blur-sm"}`}>
                     {skill.name}
                   </span>
                 </div>
@@ -66,7 +71,7 @@ export default function Component() {
             {skillsData.slice(6, 11).map((skill, index) => (
               <div
                 key={`row2-${index}`}
-                className="group relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/25"
+                className={skillCardClass(isMobile)}
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
@@ -78,7 +83,7 @@ export default function Component() {
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded backdrop-blur-sm">
+                  <span className={`text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded ${isMobile ? "" : "backdrop-blur-sm"}`}>
                     {skill.name}
                   </span>
                 </div>
@@ -91,7 +96,7 @@ export default function Component() {
             {skillsData.slice(11, 15).map((skill, index) => (
               <div
                 key={`row3-${index}`}
-                className="group relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/25"
+                className={skillCardClass(isMobile)}
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
@@ -103,7 +108,7 @@ export default function Component() {
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded backdrop-blur-sm">
+                  <span className={`text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded ${isMobile ? "" : "backdrop-blur-sm"}`}>
                     {skill.name}
                   </span>
                 </div>
@@ -116,7 +121,7 @@ export default function Component() {
             {skillsData.slice(15, 18).map((skill, index) => (
               <div
                 key={`row4-${index}`}
-                className="group relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/25"
+                className={skillCardClass(isMobile)}
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
@@ -128,7 +133,7 @@ export default function Component() {
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded backdrop-blur-sm">
+                  <span className={`text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded ${isMobile ? "" : "backdrop-blur-sm"}`}>
                     {skill.name}
                   </span>
                 </div>
@@ -141,7 +146,7 @@ export default function Component() {
             {skillsData.slice(18, 20).map((skill, index) => (
               <div
                 key={`row5-${index}`}
-                className="group relative w-16 h-16 md:w-20 md:h-20 rounded-2xl bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 hover:border-orange-400/40 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-orange-500/25"
+                className={skillCardClass(isMobile)}
               >
                 <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-white/10 to-transparent" />
                 <div className="flex items-center justify-center h-full p-2">
@@ -153,7 +158,7 @@ export default function Component() {
                   />
                 </div>
                 <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded backdrop-blur-sm">
+                  <span className={`text-xs text-orange-200 whitespace-nowrap bg-orange-900/50 px-2 py-1 rounded ${isMobile ? "" : "backdrop-blur-sm"}`}>
                     {skill.name}
                   </span>
                 </div>

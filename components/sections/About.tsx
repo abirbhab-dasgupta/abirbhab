@@ -2,9 +2,11 @@
 
 import { motion } from "framer-motion"
 import { Badge } from "@/components/ui/badge"
-import Image from "next/image";
+import Image from "next/image"
+import { useIsMobile } from "@/lib/use-mobile"
 
 export default function AboutSection() {
+  const isMobile = useIsMobile()
   return (
     <section
       id="about"
@@ -19,19 +21,23 @@ export default function AboutSection() {
         }}
       />
 
-      {/* Background Decorative Elements */}
+      {/* Background Decorative Elements — no infinite rotation on mobile to reduce lag */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-20 right-10 w-72 h-72 border border-orange-500/20 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-48 h-48 border border-orange-400/10 rounded-full"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/5 to-transparent rounded-full blur-3xl" />
+        {!isMobile && (
+          <>
+            <motion.div
+              className="absolute top-20 right-10 w-72 h-72 border border-orange-500/20 rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 50, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute bottom-20 left-10 w-48 h-48 border border-orange-400/10 rounded-full"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            />
+          </>
+        )}
+        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/5 to-transparent rounded-full ${isMobile ? "blur-2xl" : "blur-3xl"}`} />
       </div>
 
       <div className="relative max-w-7xl mx-auto">
@@ -79,10 +85,10 @@ export default function AboutSection() {
               transition={{ duration: 0.8 }}
               viewport={{ once: true }}
             >
-              <div className="relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 rounded-2xl p-6 lg:p-8">
-                <div className="absolute top-0 right-0 w-20 h-20 bg-orange-500/10 rounded-full blur-xl" />
+              <div className={`relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 border border-orange-400/20 rounded-2xl p-6 lg:p-8 ${isMobile ? "bg-orange-500/5" : "backdrop-blur-sm"}`}>
+                <div className={`absolute top-0 right-0 w-20 h-20 bg-orange-500/10 rounded-full ${isMobile ? "blur-lg" : "blur-xl"}`} />
                 <div className="relative z-10">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-orange-600/20 backdrop-blur-sm mb-4">
+                  <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-orange-600/20 mb-4 ${isMobile ? "" : "backdrop-blur-sm"}`}>
                     <span className="text-sm font-medium text-white/80">About Me</span>
                   </div>
                   <h3 className="text-2xl font-light mb-6 text-white/60">Who I Am</h3>
@@ -107,25 +113,25 @@ export default function AboutSection() {
 
                   <div className="mt-8 grid grid-cols-2 gap-4">
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-500/30 to-transparent">
-                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
+                      <div className={`bg-[#0d0806]/90 p-4 rounded-xl h-full ${isMobile ? "" : "backdrop-blur-sm"}`}>
                         <div className="text-3xl font-light text-orange-400 mb-2">3+</div>
                         <div className="text-white/80 text-sm">Years of Experience</div>
                       </div>
                     </div>
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-600/30 to-transparent">
-                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
+                      <div className={`bg-[#0d0806]/90 p-4 rounded-xl h-full ${isMobile ? "" : "backdrop-blur-sm"}`}>
                         <div className="text-3xl font-light text-orange-500 mb-2">30+</div>
                         <div className="text-white/80 text-sm">Projects Completed</div>
                       </div>
                     </div>
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-400/30 to-transparent">
-                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
+                      <div className={`bg-[#0d0806]/90 p-4 rounded-xl h-full ${isMobile ? "" : "backdrop-blur-sm"}`}>
                         <div className="text-3xl font-light text-orange-300 mb-2">10+</div>
                         <div className="text-white/80 text-sm">Happy Clients</div>
                       </div>
                     </div>
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-500/30 to-transparent">
-                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-4 rounded-xl h-full">
+                      <div className={`bg-[#0d0806]/90 p-4 rounded-xl h-full ${isMobile ? "" : "backdrop-blur-sm"}`}>
                         <div className="text-3xl font-light text-orange-400 mb-2">5+</div>
                         <div className="text-white/80 text-sm">Open Source Contributions</div>
                       </div>
@@ -141,17 +147,17 @@ export default function AboutSection() {
               transition={{ duration: 0.8, delay: 0.2 }}
               viewport={{ once: true }}
             >
-              <div className="relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 rounded-2xl p-6 lg:p-8">
-                <div className="absolute top-0 left-0 w-20 h-20 bg-orange-500/10 rounded-full blur-xl" />
+              <div className={`relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 border border-orange-400/20 rounded-2xl p-6 lg:p-8 ${isMobile ? "bg-orange-500/5" : "backdrop-blur-sm"}`}>
+                <div className={`absolute top-0 left-0 w-20 h-20 bg-orange-500/10 rounded-full ${isMobile ? "blur-lg" : "blur-xl"}`} />
                 <div className="relative z-10">
-                  <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-orange-600/20 backdrop-blur-sm mb-4">
+                  <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gradient-to-r from-orange-500/20 to-orange-600/20 mb-4 ${isMobile ? "" : "backdrop-blur-sm"}`}>
                     <span className="text-sm font-medium text-white/80">Education & Training</span>
                   </div>
                   <h3 className="text-2xl font-light mb-6 text-white/60">My Background</h3>
 
                   <div className="space-y-6">
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-500/30 via-orange-500/10 to-transparent">
-                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-6 rounded-xl">
+                      <div className={`bg-[#0d0806]/90 p-6 rounded-xl ${isMobile ? "" : "backdrop-blur-sm"}`}>
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
@@ -188,7 +194,7 @@ export default function AboutSection() {
                     </div>
 
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-600/30 via-orange-600/10 to-transparent">
-                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-6 rounded-xl">
+                      <div className={`bg-[#0d0806]/90 p-6 rounded-xl ${isMobile ? "" : "backdrop-blur-sm"}`}>
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image
@@ -216,7 +222,7 @@ export default function AboutSection() {
                     </div>
 
                     <div className="p-0.5 rounded-xl bg-gradient-to-br from-orange-400/30 via-orange-400/10 to-transparent">
-                      <div className="bg-[#0d0806]/90 backdrop-blur-sm p-6 rounded-xl">
+                      <div className={`bg-[#0d0806]/90 p-6 rounded-xl ${isMobile ? "" : "backdrop-blur-sm"}`}>
                         <div className="flex items-start gap-4">
                           <div className="relative flex-shrink-0 w-12 h-12 rounded-lg overflow-hidden bg-gradient-to-br from-white/5 to-white/10">
                             <Image

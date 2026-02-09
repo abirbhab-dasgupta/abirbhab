@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { motion } from "framer-motion"
 import { Github, Linkedin, Mail, Send, CheckCircle, AlertCircle } from "lucide-react"
+import { useIsMobile } from "@/lib/use-mobile"
 
 interface FormData {
   fullName: string
@@ -125,21 +126,26 @@ export default function ContactSection() {
       username: "abirbhab00dasgupta@gmail.com",
     },
   ]
+  const isMobile = useIsMobile()
   return (
     <section id="contact" className="relative min-h-screen w-full py-20 px-4 sm:px-6 lg:px-8 bg-transparent overflow-hidden">
-      {/* Background Decorative Elements */}
+      {/* Background Decorative Elements — no infinite rotation on mobile */}
       <div className="absolute inset-0 pointer-events-none">
-        <motion.div
-          className="absolute top-20 right-10 w-72 h-72 border border-orange-500/20 rounded-full"
-          animate={{ rotate: 360 }}
-          transition={{ duration: 50, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
-        <motion.div
-          className="absolute bottom-20 left-10 w-48 h-48 border border-orange-400/10 rounded-full"
-          animate={{ rotate: -360 }}
-          transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
-        />
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/5 to-transparent rounded-full blur-3xl" />
+        {!isMobile && (
+          <>
+            <motion.div
+              className="absolute top-20 right-10 w-72 h-72 border border-orange-500/20 rounded-full"
+              animate={{ rotate: 360 }}
+              transition={{ duration: 50, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            />
+            <motion.div
+              className="absolute bottom-20 left-10 w-48 h-48 border border-orange-400/10 rounded-full"
+              animate={{ rotate: -360 }}
+              transition={{ duration: 40, repeat: Number.POSITIVE_INFINITY, ease: "linear" }}
+            />
+          </>
+        )}
+        <div className={`absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-orange-500/5 to-transparent rounded-full ${isMobile ? "blur-2xl" : "blur-3xl"}`} />
       </div>
 
       <div className="relative max-w-7xl mx-auto">
@@ -186,9 +192,9 @@ export default function ContactSection() {
           >
             <div className="relative flex flex-col gap-6">
               {/* Form Container with Unique Shape */}
-              <div className="relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 rounded-2xl p-5 lg:p-6 max-w-xl mx-auto">
-                <div className="absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full blur-2xl" />
-                <div className="absolute bottom-0 left-0 w-16 h-16 bg-orange-400/10 rounded-full blur-xl" />
+              <div className={`relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 border border-orange-400/20 rounded-2xl p-5 lg:p-6 max-w-xl mx-auto ${isMobile ? "" : "backdrop-blur-sm"}`}>
+                <div className={`absolute top-0 right-0 w-24 h-24 bg-orange-500/10 rounded-full ${isMobile ? "blur-xl" : "blur-2xl"}`} />
+                <div className={`absolute bottom-0 left-0 w-16 h-16 bg-orange-400/10 rounded-full ${isMobile ? "blur-lg" : "blur-xl"}`} />
 
                 <div className="relative z-10">
                   <h3 className="text-3xl font-bold text-white/60 mb-8">Send a Message</h3>
@@ -284,8 +290,8 @@ export default function ContactSection() {
                       type="submit"
                       disabled={submission.status === "loading"}
                       className="group relative w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-orange-500 to-orange-600 hover:from-orange-600 hover:to-orange-700 text-white font-semibold rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed overflow-hidden"
-                      whileHover={{ scale: submission.status === "loading" ? 1 : 1.02 }}
-                      whileTap={{ scale: 0.98 }}
+                      whileHover={isMobile ? undefined : { scale: submission.status === "loading" ? 1 : 1.02 }}
+                      whileTap={isMobile ? undefined : { scale: 0.98 }}
                     >
                       <div className="absolute inset-0 bg-gradient-to-r from-orange-400 to-orange-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       <div className="relative flex items-center justify-center gap-2">
@@ -343,8 +349,8 @@ export default function ContactSection() {
             transition={{ duration: 0.8, delay: 0.4 }}
           >
             {/* Social Links Card */}
-            <div className="relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 rounded-2xl p-4 sm:p-6 lg:p-8 w-full max-w-md mx-auto lg:mx-0">
-              <div className="absolute top-0 right-0 w-20 h-20 bg-orange-500/10 rounded-full blur-xl" />
+            <div className={`relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 border border-orange-400/20 rounded-2xl p-4 sm:p-6 lg:p-8 w-full max-w-md mx-auto lg:mx-0 ${isMobile ? "" : "backdrop-blur-sm"}`}>
+              <div className={`absolute top-0 right-0 w-20 h-20 bg-orange-500/10 rounded-full ${isMobile ? "blur-lg" : "blur-xl"}`} />
               <div className="relative z-10">
                 <h3 className="text-2xl font-bold text-white/60 mb-6">Connect With Me</h3>
                 <div className="space-y-4">
@@ -355,10 +361,10 @@ export default function ContactSection() {
                       target={social.href.startsWith("mailto:") ? "_self" : "_blank"}
                       rel={social.href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
                       className="group flex items-center gap-4 p-4 border border-orange-400/20 rounded-xl hover:border-orange-400/40 hover:bg-orange-500/5 transition-all duration-300"
-                      whileHover={{ x: 5 }}
+                      whileHover={isMobile ? undefined : { x: 5 }}
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.1 }}
+                      transition={{ delay: index * (isMobile ? 0.05 : 0.1) }}
                       viewport={{ once: true }}
                     >
                       <div className="p-3 bg-orange-500/10 rounded-lg group-hover:bg-orange-500/20 transition-colors duration-300">
@@ -378,8 +384,8 @@ export default function ContactSection() {
 
             {/* Quote Card */}
             <motion.div
-                className="relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 backdrop-blur-sm border border-orange-400/20 rounded-xl p-4 sm:p-5 w-full max-w-md mx-auto lg:mx-0"
-                whileHover={{ scale: 1.02 }}
+                className={`relative bg-gradient-to-br from-orange-500/5 to-orange-600/10 border border-orange-400/20 rounded-xl p-4 sm:p-5 w-full max-w-md mx-auto lg:mx-0 ${isMobile ? "" : "backdrop-blur-sm"}`}
+                whileHover={isMobile ? undefined : { scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
                 <div className="absolute top-0 left-0 w-8 h-8 bg-orange-500/20 rounded-full blur-lg" />
